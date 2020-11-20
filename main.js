@@ -1,3 +1,4 @@
+
 const $btn = document.getElementById('btn-kick');
 
 const character = {
@@ -59,3 +60,5 @@ function random(num){
 }
 
 init();
+
+
