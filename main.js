@@ -5,6 +5,9 @@ function $getElById(id){
 
 const $btn = $getElById('btn-kick');
 const $logs = $getElById('logs');
+const $btnBreak = $getElById('btn-break');
+const countKick = clicksCount();
+const countBreak = clicksCount();
 
 const character = {
     name: 'Pikachu',
@@ -31,10 +34,26 @@ const enemy = {
 }
 
 $btn.addEventListener('click', function(){
-    console.log('kicked!')
+    console.log('kicked!');
+    const kicksLeft = countKick(4);
+    if (kicksLeft <= 0){
+        this.disabled = true;
+    }
+    this.innerHTML = `Kicks left (${countKick(5)})`
     character.changeHP(random(20));
     enemy.changeHP(random(20));
+    
 })
+
+$btnBreak.addEventListener('click', function(){
+    console.log('break!');
+    const breaksLeft = countBreak(3);
+    if (breaksLeft <= 0){
+        this.disabled = true;
+    };
+    this.innerHTML = `Breaks left (${breaksLeft})`;
+});
+
 
 function init(){
     console.log('start the game');
@@ -100,6 +119,18 @@ function renderLog(log){
     $logEntry.innerText = log;
     $logs.insertBefore($logEntry, $logs.children[0]);
 }
+
+function clicksCount() {
+    let count = 0;
+    return function(max) {
+        count++;
+        let attempts = max - count
+        console.log(attempts);
+        return attempts > 0 ? attempts : 0;
+    };
+}
+
+
 init();
 
 
