@@ -1,5 +1,6 @@
-function random(num){
-    return Math.ceil(Math.random()*num);
+function random(max, min = 0){
+    const num = max - min;
+    return Math.ceil(Math.random()*num) + min;
 }
 
 function generateLog(firstPerson, secondPerson, count){
@@ -24,13 +25,16 @@ function $getElById(id){
     return document.getElementById(id);
 }
 
-function clicksCount() {
-    let count = 0;
+function clicksCount(count = 6, el) {
+    const innerText = el.innerText;
+    el.innerText = `${innerText} (${count})`;
     return function(max) {
-        count++;
-        let attempts = max - count
-        console.log(attempts);
-        return attempts > 0 ? attempts : 0;
+        count--;
+        el.innerText = `${innerText} (${count})`;
+        if (count === 0){
+            el.disabled = true;
+        }
+        return count;
     };
 }
 
