@@ -56,11 +56,24 @@ class Game {
                 function(count){
                     console.log(generateLog(playerOne, playerTwo, count));
                 });
+                playerOne.changeHP(damage.kick['player1'],
+                function(count){
+                    console.log(generateLog(playerTwo, playerOne, count));
+                });
+
                 if (playerTwo.hp.current === 0){
                     alert(playerOne.name + ' has won!');
                     this.clearButtons();
                     this.initGame();
                 }
+
+                if (playerOne.hp.current === 0){
+                    alert(playerTwo.name + ' has won!');
+                    this.clearButtons();
+                    this.initGame();
+                }
+
+                
             })
             $control.appendChild($btn);
         
